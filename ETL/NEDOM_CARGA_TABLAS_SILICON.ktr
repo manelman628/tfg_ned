@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<transformation>
+  <info>
+    <name>NEDOM_CARGA_TABLAS_SILICON</name>
+    <description/>
+    <extended_description/>
+    <trans_version/>
+    <trans_status>0</trans_status>
+    <directory>&#47;</directory>
+    <parameters>
+    </parameters>
+    <log>
+      <read/>
+      <write/>
+      <input/>
+      <output/>
+      <update/>
+      <rejected/>
+      <connection/>
+      <table/>
+      <step_performance_table/>
+      <use_batchid>Y</use_batchid>
+      <use_logfield>N</use_logfield>
+      <size_limit_lines/>
+    </log>
+    <maxdate>
+      <connection/>
+      <table/>
+      <field/>
+      <offset>0.0</offset>
+      <maxdiff>0.0</maxdiff>
+    </maxdate>
+    <size_rowset>10000</size_rowset>
+    <sleep_time_empty>50</sleep_time_empty>
+    <sleep_time_full>50</sleep_time_full>
+    <unique_connections>N</unique_connections>
+    <feedback_shown>Y</feedback_shown>
+    <feedback_size>50000</feedback_size>
+    <using_thread_priorities>Y</using_thread_priorities>
+    <shared_objects_file/>
+    <capture_step_performance>N</capture_step_performance>
+    <step_performance_capturing_delay>1000</step_performance_capturing_delay>
+    <dependencies>
+    </dependencies>
+    <partitionschemas>
+    </partitionschemas>
+    <slaveservers>
+    </slaveservers>
+    <clusterschemas>
+    </clusterschemas>
+  <modified_user>admin</modified_user>
+  <modified_date>2025&#47;12&#47;09 09:12:39.000</modified_date>
+  </info>
+  <notepads>
+  </notepads>
+  <connection>
+    <name>mirror_SILICON_10_50_202_71</name>
+    <server>10.10.10.10</server>
+    <type>ORACLE</type>
+    <access>Native</access>
+    <database>SILDOX05</database>
+    <port>1521</port>
+    <username>foo</username>
+    <password>foo</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_ORACLE.characterEncoding</code><attribute>ISO-8859-15</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>ned</name>
+    <server>10.10.10.10</server>
+    <type>MYSQL</type>
+    <access>Native</access>
+    <database>ned</database>
+    <port>3306</port>
+    <username>foo</username>
+    <password>foo</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
+      <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+      <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+      <attribute><code>PORT_NUMBER</code><attribute>3306</attribute></attribute>
+      <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+      <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+      <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+      <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+    </attributes>
+  </connection>
+  <order>
+  <hop> <from>get _PRESCRIPCIONES_SILICON</from><to>import_prescripciones</to><enabled>Y</enabled> </hop>  <hop> <from>get _TRATAMIENTOS_SILICON</from><to>import_tratamientos</to><enabled>Y</enabled> </hop>  </order>
+  <step>
+    <name>get _PRESCRIPCIONES_SILICON</name>
+    <type>TableInput</type>
+    <description>EDU_GRUPOTERAPEUTICO</description>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>mirror_SILICON_10_50_202_71</connection>
+    <sql>SELECT
+prescrip.tratamiento_fk id_tractament, prescrip.prescripmedicamento_id id_prescripcio, prescrip.prescripcioninicial_fk id_prescripcio_inicial,
+indi.descripc indicacio, indi.codigo codi_indicacio,
+prescrip.fechainicio data_inici, prescrip.fechafin data_fi, prescrip.validohasta valida_fins, prescrip.fechahastatomas data_fins_toma, 
+prescrip.consejosadministracion consells_admin, 
+medi.descripcion medi_desc, pac.cip cip_prescripcio,
+prescrip.via_fk, via.nombre via_codi, via.descripcion via_descripcio, 
+prescrip.frecuencia_fk, freq.codigo freq_codi, freq.descripcion freq_descripcio, freq.tipofrecuenciadescripcion freq_tipus,
+prescrip.DOSISPRESCRITA dosi, usrmed.descripc usuari_prescripcio, 
+LISTAGG(CONCAT(esp.CODIGONACIONAL, &apos;, &apos;)) WITHIN GROUP (ORDER BY esp.CODIGONACIONAL) codigonacional
+FROM SILDOX_VC.EDU_PRESCRIPMEDICAMENTO prescrip
+INNER JOIN SILDOX_VC.edu_ambulatorio tract ON tract.ambulatorio_fk_id = prescrip.tratamiento_fk
+INNER JOIN SILDOX_VC.edu_medicamentoasistencial medi ON medi.medicamentoasistencial_id=prescrip.medicamento_fk
+INNER JOIN SILDOX_VC.edu_paciente pac ON pac.paciente_id = tract.pacientes_fk
+LEFT JOIN SILDOX_VC.indicacionesprescripcion indi on indi.idindicacionesprescrip = prescrip.motivoprescripcion_fk
+LEFT JOIN SILDOX_VC.edu_via via on via.via_id = prescrip.via_fk
+LEFT JOIN SILDOX_VC.edu_frecuenciaprescripcion freq on freq.frecuencia_id = prescrip.frecuencia_fk
+LEFT JOIN SILDOX_VC.usuarios usrmed ON usrmed.idusuari = prescrip.usuariosmedico_fk
+LEFT JOIN SILDOX_VC.edu_especialidadasistencial esp on medi.medicamentoasistencial_id=esp.medicamentoasistencial_fk
+WHERE (tract.programamedicacion_fk = 34 AND tract.servicio_fk IN (5,27,28,29)) OR (tract.ambulatorio_fk_id IN (
+633477,
+591302))
+GROUP BY prescrip.tratamiento_fk, prescrip.prescripmedicamento_id, prescrip.prescripcioninicial_fk,
+indi.descripc, indi.codigo,
+prescrip.fechainicio, prescrip.fechafin, prescrip.validohasta, prescrip.fechahastatomas, 
+prescrip.consejosadministracion, medi.descripcion, pac.cip,
+prescrip.via_fk, via.nombre, via.descripcion,prescrip.frecuencia_fk, freq.codigo, freq.descripcion, freq.tipofrecuenciadescripcion,
+prescrip.DOSISPRESCRITA, usrmed.descripc
+ORDER BY  prescrip.prescripmedicamento_id ASC, prescrip.tratamiento_fk ASC</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>Y</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>122</xloc>
+      <yloc>147</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>get _TRATAMIENTOS_SILICON</name>
+    <type>TableInput</type>
+    <description>EDU_GRUPOTERAPEUTICO</description>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>mirror_SILICON_10_50_202_71</connection>
+    <sql>SELECT 
+tract.ambulatorio_fk_id id, to_char(tract.fechaingreso,&apos;YYYY-MM-DD&apos;) &quot;data_ingres&quot;,
+to_char(tract.fechaalta,&apos;YYYY-MM-DD&apos;) &quot;data_alta&quot;, tract.suspendido suspes, tract.observaciones obs_tractament, 
+to_char(tract.confirmadohasta,&apos;YYYY-MM-DD HH24:MI&apos;) &quot;confirmat_fins&quot;, tract.pendienteconfirmar pendent_confirmar, to_char(tract.validohasta,&apos;YYYY-MM-DD HH24:MI&apos;) &quot;valid_fins&quot;, tract.etcid etc_id,
+to_char(tract.fechaproceso,&apos;YYYY-MM-DD HH24:MI:SS&apos;) &quot;data_proces&quot;, 
+pac.NHC, pac.cip, pac.nif, pac.nombre nom_pacient , pac.apellido cognoms_pacient,  to_char(pac.fechanacimiento,&apos;YYYY-MM-DD&apos;) data_naixement,  to_char(pac.fechaexitus,&apos;YYYY-MM-DD&apos;) data_exitus,
+pac.direccion adressa, pac.poblacion poblacio, pac.codigopostal codi_postal, pac.provincia, pac.nacionalidad nacionalitat, pac.telefono1 telefon, pac.sexo sexe,
+LISTAGG(CONCAT(CONCAT(ant.tipo,&apos; - &apos;), ant.descripcion), &apos;; &apos;) WITHIN GROUP (ORDER BY ant.descripcion) antecedents,
+usu.descripcion usuari, usu.login usuari_login, usu.grupo_descripcion usuari_grup, LISTAGG(DISTINCT serv.descripcion, &apos;, &apos;) WITHIN GROUP (ORDER BY serv.descripcion) &quot;usuari_servei&quot;,
+usu.grupo_rol usuari_rol, usu.medico_numerocolegiado usuari_num_colegiat, 
+usu.email usuari_email, usu.medico_codigo usuari_codi_metge, usu.activo usuari_actiu, 
+serv.codigo servei_codi, serv.descripcion servei
+FROM SILDOX_VC.edu_ambulatorio tract 
+INNER JOIN SILDOX_VC.edu_paciente pac ON pac.paciente_id = tract.pacientes_fk
+LEFT JOIN SILDOX_VC.edu_usuario usu ON usu.usuario_id = tract.medico_fk
+LEFT JOIN SILDOX_VC.edu_servicio serv ON serv.servicio_id = tract.servicio_fk AND serv.descripcion &lt;&gt; &apos;No definido&apos;
+LEFT JOIN SILDOX_VC.edu_pacientesantecedentes ant ON ant.pacientes_fk = pac.paciente_id
+WHERE (tract.programamedicacion_fk = 34 AND tract.servicio_fk IN (5,27,28,29)) OR (tract.ambulatorio_fk_id IN (
+633477,
+591302))
+GROUP BY tract.ambulatorio_fk_id, tract.fechaingreso,
+tract.fechaalta, tract.suspendido, tract.observaciones, tract.confirmadohasta, tract.pendienteconfirmar,tract.validohasta,tract.etcid,tract.fechaproceso,
+pac.NHC, pac.cip, pac.nif, pac.nombre, pac.apellido,  pac.fechanacimiento,pac.fechaexitus,
+pac.direccion, pac.poblacion, pac.codigopostal, pac.provincia, pac.nacionalidad, pac.telefono1, pac.sexo,
+usu.descripcion, usu.login, usu.grupo_descripcion, usu.grupo_rol, usu.medico_numerocolegiado, 
+usu.email, usu.medico_codigo, usu.activo, serv.codigo, serv.descripcion
+ORDER BY tract.ambulatorio_fk_id asc</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>121</xloc>
+      <yloc>51</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>import_prescripciones</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>ned</connection>
+    <schema/>
+    <table>import_prescripcions</table>
+    <commit>1000</commit>
+    <truncate>Y</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+        <field>
+          <column_name>ID_TRACTAMENT</column_name>
+          <stream_name>ID_TRACTAMENT</stream_name>
+        </field>
+        <field>
+          <column_name>ID_PRESCRIPCIO</column_name>
+          <stream_name>ID_PRESCRIPCIO</stream_name>
+        </field>
+        <field>
+          <column_name>ID_PRESCRIPCIO_INICIAL</column_name>
+          <stream_name>ID_PRESCRIPCIO_INICIAL</stream_name>
+        </field>
+        <field>
+          <column_name>INDICACIO</column_name>
+          <stream_name>INDICACIO</stream_name>
+        </field>
+        <field>
+          <column_name>CODI_INDICACIO</column_name>
+          <stream_name>CODI_INDICACIO</stream_name>
+        </field>
+        <field>
+          <column_name>DATA_INICI</column_name>
+          <stream_name>DATA_INICI</stream_name>
+        </field>
+        <field>
+          <column_name>DATA_FI</column_name>
+          <stream_name>DATA_FI</stream_name>
+        </field>
+        <field>
+          <column_name>VALIDA_FINS</column_name>
+          <stream_name>VALIDA_FINS</stream_name>
+        </field>
+        <field>
+          <column_name>DATA_FINS_TOMA</column_name>
+          <stream_name>DATA_FINS_TOMA</stream_name>
+        </field>
+        <field>
+          <column_name>CONSELLS_ADMIN</column_name>
+          <stream_name>CONSELLS_ADMIN</stream_name>
+        </field>
+        <field>
+          <column_name>MEDI_DESC</column_name>
+          <stream_name>MEDI_DESC</stream_name>
+        </field>
+        <field>
+          <column_name>CIP_PRESCRIPCIO</column_name>
+          <stream_name>CIP_PRESCRIPCIO</stream_name>
+        </field>
+        <field>
+          <column_name>VIA_FK</column_name>
+          <stream_name>VIA_FK</stream_name>
+        </field>
+        <field>
+          <column_name>VIA_CODI</column_name>
+          <stream_name>VIA_CODI</stream_name>
+        </field>
+        <field>
+          <column_name>VIA_DESCRIPCIO</column_name>
+          <stream_name>VIA_DESCRIPCIO</stream_name>
+        </field>
+        <field>
+          <column_name>FRECUENCIA_FK</column_name>
+          <stream_name>FRECUENCIA_FK</stream_name>
+        </field>
+        <field>
+          <column_name>FREQ_CODI</column_name>
+          <stream_name>FREQ_CODI</stream_name>
+        </field>
+        <field>
+          <column_name>FREQ_DESCRIPCIO</column_name>
+          <stream_name>FREQ_DESCRIPCIO</stream_name>
+        </field>
+        <field>
+          <column_name>FREQ_TIPUS</column_name>
+          <stream_name>FREQ_TIPUS</stream_name>
+        </field>
+        <field>
+          <column_name>DOSI</column_name>
+          <stream_name>DOSI</stream_name>
+        </field>
+        <field>
+          <column_name>USUARI_PRESCRIPCIO</column_name>
+          <stream_name>USUARI_PRESCRIPCIO</stream_name>
+        </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>533</xloc>
+      <yloc>144</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>import_tratamientos</name>
+    <type>TableOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>ned</connection>
+    <schema/>
+    <table>import_tractaments</table>
+    <commit>1000</commit>
+    <truncate>Y</truncate>
+    <ignore_errors>N</ignore_errors>
+    <use_batch>Y</use_batch>
+    <specify_fields>Y</specify_fields>
+    <partitioning_enabled>N</partitioning_enabled>
+    <partitioning_field/>
+    <partitioning_daily>N</partitioning_daily>
+    <partitioning_monthly>Y</partitioning_monthly>
+    <tablename_in_field>N</tablename_in_field>
+    <tablename_field/>
+    <tablename_in_table>Y</tablename_in_table>
+    <return_keys>N</return_keys>
+    <return_field/>
+    <fields>
+        <field>
+          <column_name>ID</column_name>
+          <stream_name>ID</stream_name>
+        </field>
+        <field>
+          <column_name>data_ingres</column_name>
+          <stream_name>data_ingres</stream_name>
+        </field>
+        <field>
+          <column_name>data_alta</column_name>
+          <stream_name>data_alta</stream_name>
+        </field>
+        <field>
+          <column_name>SUSPES</column_name>
+          <stream_name>SUSPES</stream_name>
+        </field>
+        <field>
+          <column_name>confirmat_fins</column_name>
+          <stream_name>confirmat_fins</stream_name>
+        </field>
+        <field>
+          <column_name>PENDENT_CONFIRMAR</column_name>
+          <stream_name>PENDENT_CONFIRMAR</stream_name>
+        </field>
+        <field>
+          <column_name>valid_fins</column_name>
+          <stream_name>valid_fins</stream_name>
+        </field>
+        <field>
+          <column_name>ETC_ID</column_name>
+          <stream_name>ETC_ID</stream_name>
+        </field>
+        <field>
+          <column_name>data_proces</column_name>
+          <stream_name>data_proces</stream_name>
+        </field>
+        <field>
+          <column_name>NHC</column_name>
+          <stream_name>NHC</stream_name>
+        </field>
+        <field>
+          <column_name>CIP</column_name>
+          <stream_name>CIP</stream_name>
+        </field>
+        <field>
+          <column_name>NIF</column_name>
+          <stream_name>NIF</stream_name>
+        </field>
+        <field>
+          <column_name>NOM_PACIENT</column_name>
+          <stream_name>NOM_PACIENT</stream_name>
+        </field>
+        <field>
+          <column_name>COGNOMS_PACIENT</column_name>
+          <stream_name>COGNOMS_PACIENT</stream_name>
+        </field>
+        <field>
+          <column_name>DATA_NAIXEMENT</column_name>
+          <stream_name>DATA_NAIXEMENT</stream_name>
+        </field>
+        <field>
+          <column_name>DATA_EXITUS</column_name>
+          <stream_name>DATA_EXITUS</stream_name>
+        </field>
+        <field>
+          <column_name>ADRESSA</column_name>
+          <stream_name>ADRESSA</stream_name>
+        </field>
+        <field>
+          <column_name>POBLACIO</column_name>
+          <stream_name>POBLACIO</stream_name>
+        </field>
+        <field>
+          <column_name>CODI_POSTAL</column_name>
+          <stream_name>CODI_POSTAL</stream_name>
+        </field>
+        <field>
+          <column_name>PROVINCIA</column_name>
+          <stream_name>PROVINCIA</stream_name>
+        </field>
+        <field>
+          <column_name>NACIONALITAT</column_name>
+          <stream_name>NACIONALITAT</stream_name>
+        </field>
+        <field>
+          <column_name>TELEFON</column_name>
+          <stream_name>TELEFON</stream_name>
+        </field>
+        <field>
+          <column_name>SEXE</column_name>
+          <stream_name>SEXE</stream_name>
+        </field>
+        <field>
+          <column_name>ANTECEDENTS</column_name>
+          <stream_name>ANTECEDENTS</stream_name>
+        </field>
+        <field>
+          <column_name>USUARI</column_name>
+          <stream_name>USUARI</stream_name>
+        </field>
+        <field>
+          <column_name>USUARI_LOGIN</column_name>
+          <stream_name>USUARI_LOGIN</stream_name>
+        </field>
+        <field>
+          <column_name>USUARI_GRUP</column_name>
+          <stream_name>USUARI_GRUP</stream_name>
+        </field>
+        <field>
+          <column_name>usuari_servei</column_name>
+          <stream_name>usuari_servei</stream_name>
+        </field>
+        <field>
+          <column_name>USUARI_ROL</column_name>
+          <stream_name>USUARI_ROL</stream_name>
+        </field>
+        <field>
+          <column_name>USUARI_NUM_COLEGIAT</column_name>
+          <stream_name>USUARI_NUM_COLEGIAT</stream_name>
+        </field>
+        <field>
+          <column_name>USUARI_EMAIL</column_name>
+          <stream_name>USUARI_EMAIL</stream_name>
+        </field>
+        <field>
+          <column_name>USUARI_CODI_METGE</column_name>
+          <stream_name>USUARI_CODI_METGE</stream_name>
+        </field>
+        <field>
+          <column_name>USUARI_ACTIU</column_name>
+          <stream_name>USUARI_ACTIU</stream_name>
+        </field>
+        <field>
+          <column_name>SERVEI_CODI</column_name>
+          <stream_name>SERVEI_CODI</stream_name>
+        </field>
+        <field>
+          <column_name>SERVEI</column_name>
+          <stream_name>SERVEI</stream_name>
+        </field>
+        <field>
+          <column_name>OBS_TRACTAMENT</column_name>
+          <stream_name>OBS_TRACTAMENT</stream_name>
+        </field>
+    </fields>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>545</xloc>
+      <yloc>47</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step>
+    <name>truncates tablas cambios</name>
+    <type>ExecSQL</type>
+    <description/>
+    <distribute>Y</distribute>
+    <copies>1</copies>
+         <partitioning>
+           <method>none</method>
+           <schema_name/>
+           </partitioning>
+    <connection>ned</connection>
+    <execute_each_row>N</execute_each_row>
+    <replace_variables>N</replace_variables>
+    <sql>TRUNCATE TABLE `canvis_tractaments`;
+TRUNCATE TABLE `canvis_prescripcions`;</sql>
+    <insert_field/>
+    <update_field/>
+    <delete_field/>
+    <read_field/>
+    <arguments>
+    </arguments>
+     <cluster_schema/>
+ <remotesteps>   <input>   </input>   <output>   </output> </remotesteps>    <GUI>
+      <xloc>122</xloc>
+      <yloc>247</yloc>
+      <draw>Y</draw>
+      </GUI>
+    </step>
+
+  <step_error_handling>
+  </step_error_handling>
+   <slave-step-copy-partition-distribution>
+</slave-step-copy-partition-distribution>
+   <slave_transformation>N</slave_transformation>
+</transformation>

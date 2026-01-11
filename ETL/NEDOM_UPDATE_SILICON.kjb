@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<job>
+  <name>NEDOM_UPDATE_SILICON</name>
+    <description/>
+    <extended_description/>
+    <job_version/>
+    <job_status>0</job_status>
+  <directory>&#47;</directory>
+  <created_user>admin</created_user>
+  <created_date>2025&#47;12&#47;09 09:12:39.000</created_date>
+  <modified_user>admin</modified_user>
+  <modified_date>2025&#47;12&#47;09 09:12:39.000</modified_date>
+    <parameters>
+    </parameters>
+  
+    <connection>
+      <name>mirror_SILICON_10_50_202_71</name>
+      <server>10.10.10.10</server>
+      <type>ORACLE</type>
+      <access>Native</access>
+      <database>SILDOX05</database>
+      <port>1521</port>
+      <username>foo</username>
+      <password>foo</password>
+      <servername/>
+      <data_tablespace/>
+      <index_tablespace/>
+      <attributes>
+        <attribute><code>EXTRA_OPTION_ORACLE.characterEncoding</code><attribute>ISO-8859-15</attribute></attribute>
+        <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+        <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+        <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+        <attribute><code>PORT_NUMBER</code><attribute>1521</attribute></attribute>
+        <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+        <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+        <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+      </attributes>
+    </connection>
+    <connection>
+      <name>ned</name>
+      <server>10.10.10.10</server>
+      <type>MYSQL</type>
+      <access>Native</access>
+      <database>ned</database>
+      <port>3306</port>
+      <username>foo</username>
+      <password>foo</password>
+      <servername/>
+      <data_tablespace/>
+      <index_tablespace/>
+      <attributes>
+        <attribute><code>EXTRA_OPTION_MYSQL.defaultFetchSize</code><attribute>500</attribute></attribute>
+        <attribute><code>EXTRA_OPTION_MYSQL.useCursorFetch</code><attribute>true</attribute></attribute>
+        <attribute><code>FORCE_IDENTIFIERS_TO_LOWERCASE</code><attribute>N</attribute></attribute>
+        <attribute><code>FORCE_IDENTIFIERS_TO_UPPERCASE</code><attribute>N</attribute></attribute>
+        <attribute><code>IS_CLUSTERED</code><attribute>N</attribute></attribute>
+        <attribute><code>PORT_NUMBER</code><attribute>3306</attribute></attribute>
+        <attribute><code>QUOTE_ALL_FIELDS</code><attribute>N</attribute></attribute>
+        <attribute><code>STREAM_RESULTS</code><attribute>Y</attribute></attribute>
+        <attribute><code>SUPPORTS_BOOLEAN_DATA_TYPE</code><attribute>N</attribute></attribute>
+        <attribute><code>USE_POOLING</code><attribute>N</attribute></attribute>
+      </attributes>
+    </connection>
+  <size_limit_lines/>
+   <use_batchid>Y</use_batchid>
+   <pass_batchid>N</pass_batchid>
+   <use_logfield>Y</use_logfield>
+   <shared_objects_file/>
+  <entries>
+    <entry>
+      <name>NEDOM_ACTUALIZA</name>
+      <description>Transformation</description>
+      <type>TRANS</type>
+      <filename/>
+      <transname>NEDOM_ACTUALIZA</transname>
+      <directory>&#47;</directory>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>437</xloc>
+      <yloc>132</yloc>
+      </entry>
+    <entry>
+      <name>NEDOM_COMPRUEBA_SINCRO</name>
+      <description>Transformation</description>
+      <type>TRANS</type>
+      <filename/>
+      <transname>NEDOM_COMPRUEBA_SINCRO</transname>
+      <directory>&#47;</directory>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>198</xloc>
+      <yloc>135</yloc>
+      </entry>
+    <entry>
+      <name>NEDOM_LIMPIA</name>
+      <description>Transformation</description>
+      <type>TRANS</type>
+      <filename/>
+      <transname>NEDOM_LIMPIA</transname>
+      <directory>&#47;</directory>
+      <arg_from_previous>N</arg_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Nothing</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <parameters>        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>552</xloc>
+      <yloc>130</yloc>
+      </entry>
+    <entry>
+      <name>START</name>
+      <description>Special entries</description>
+      <type>SPECIAL</type>
+      <start>Y</start>
+      <dummy>N</dummy>
+      <repeat>N</repeat>
+      <schedulerType>0</schedulerType>
+      <intervalSeconds>0</intervalSeconds>
+      <intervalMinutes>60</intervalMinutes>
+      <hour>12</hour>
+      <minutes>0</minutes>
+      <weekDay>1</weekDay>
+      <DayOfMonth>1</DayOfMonth>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>78</xloc>
+      <yloc>133</yloc>
+      </entry>
+    <entry>
+      <name>Success</name>
+      <description>Success</description>
+      <type>SUCCESS</type>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>753</xloc>
+      <yloc>125</yloc>
+      </entry>
+    <entry>
+      <name>mail OK</name>
+      <description>Mail</description>
+      <type>MAIL</type>
+      <server>10.84.147.156</server>
+      <port/>
+      <destination>msegurap.ebre.ics@gencat.cat</destination>
+      <destinationCc/>
+      <destinationBCc/>
+      <replyto>informatica.ebre.ics@gencat.cat</replyto>
+      <replytoname>informatica.ebre.ics@gencat.cat</replytoname>
+      <subject>NED - Actualització Silicon Exitosa</subject>
+      <include_date>Y</include_date>
+      <contact_person/>
+      <contact_phone/>
+      <comment>S&apos;ha actualitzat la informació a la BD de NED amb els canvis d&apos;avui a Silicon</comment>
+      <include_files>N</include_files>
+      <zip_files>N</zip_files>
+      <zip_name>indicadors_aplicacions.zip</zip_name>
+      <use_auth>N</use_auth>
+      <use_secure_auth>Y</use_secure_auth>
+      <auth_user>informatica.ebre</auth_user>
+      <auth_password>Encrypted 2be98afc86aa7f28ba80dbb72cc97ff82</auth_password>
+      <only_comment>Y</only_comment>
+      <use_HTML>Y</use_HTML>
+      <use_Priority>N</use_Priority>
+      <encoding>UTF-8</encoding>
+      <priority>normal</priority>
+      <importance>normal</importance>
+      <secureconnectiontype>TLS</secureconnectiontype>
+      <replyToAddresses>informatica.ebre.ics@gencat.cat</replyToAddresses>
+      <filetypes>        <filetype>GENERAL</filetype>
+      </filetypes>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>652</xloc>
+      <yloc>127</yloc>
+      </entry>
+    <entry>
+      <name>mail KO</name>
+      <description>Mail</description>
+      <type>MAIL</type>
+      <server>10.84.147.156</server>
+      <port/>
+      <destination>msegurap.ebre.ics@gencat.cat</destination>
+      <destinationCc/>
+      <destinationBCc/>
+      <replyto>informatica.ebre.ics@gencat.cat</replyto>
+      <replytoname>informatica.ebre.ics@gencat.cat</replytoname>
+      <subject>NED - ERROR actualització</subject>
+      <include_date>Y</include_date>
+      <contact_person/>
+      <contact_phone/>
+      <comment>Hi ha hagut un error a l&apos;actualitzar la informació de la BD de NED</comment>
+      <include_files>Y</include_files>
+      <zip_files>N</zip_files>
+      <zip_name>indicadors_aplicacions.zip</zip_name>
+      <use_auth>N</use_auth>
+      <use_secure_auth>Y</use_secure_auth>
+      <auth_user>informatica.ebre</auth_user>
+      <auth_password>Encrypted 2be98afc86aa7f28ba80dbb72cc97ff82</auth_password>
+      <only_comment>Y</only_comment>
+      <use_HTML>Y</use_HTML>
+      <use_Priority>N</use_Priority>
+      <encoding>UTF-8</encoding>
+      <priority>normal</priority>
+      <importance>normal</importance>
+      <secureconnectiontype>TLS</secureconnectiontype>
+      <replyToAddresses>informatica.ebre.ics@gencat.cat</replyToAddresses>
+      <filetypes>        <filetype>GENERAL</filetype>
+        <filetype>LOG</filetype>
+        <filetype>ERRORLINE</filetype>
+        <filetype>ERROR</filetype>
+      </filetypes>      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>445</xloc>
+      <yloc>309</yloc>
+      </entry>
+    <entry>
+      <name>sincro ok</name>
+      <description>Simple evaluation</description>
+      <type>SIMPLE_EVAL</type>
+      <valuetype>field</valuetype>
+      <fieldname>hiharegistres</fieldname>
+      <variablename>update_db</variablename>
+      <fieldtype>string</fieldtype>
+      <mask/>
+      <comparevalue>1</comparevalue>
+      <minvalue/>
+      <maxvalue/>
+      <successcondition>equal</successcondition>
+      <successnumbercondition>equal</successnumbercondition>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>320</xloc>
+      <yloc>134</yloc>
+      </entry>
+  </entries>
+  <hops>
+    <hop>
+      <from>NEDOM_ACTUALIZA</from>
+      <to>mail KO</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>NEDOM_ACTUALIZA</from>
+      <to>NEDOM_LIMPIA</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>NEDOM_COMPRUEBA_SINCRO</from>
+      <to>mail KO</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>START</from>
+      <to>NEDOM_COMPRUEBA_SINCRO</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>mail OK</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>mail KO</from>
+      <to>Success</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>NEDOM_LIMPIA</from>
+      <to>mail KO</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>NEDOM_LIMPIA</from>
+      <to>mail OK</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>NEDOM_COMPRUEBA_SINCRO</from>
+      <to>sincro ok</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>sincro ok</from>
+      <to>NEDOM_ACTUALIZA</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>sincro ok</from>
+      <to>mail KO</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+  </hops>
+  <notepads>
+    <notepad>
+      <note>Se ejecuta después de NEDOM_SINCRO_SILICON y de la sincronización de cambios de la App (tarea CRON)</note>
+      <xloc>162</xloc>
+      <yloc>34</yloc>
+      <width>552</width>
+      <heigth>26</heigth>
+    </notepad>
+  </notepads>
+</job>

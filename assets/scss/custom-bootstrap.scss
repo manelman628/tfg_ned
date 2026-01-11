@@ -1,0 +1,113 @@
+
+// Include any default variable overrides here
+
+@import "../../node_modules/bootstrap/scss/bootstrap";
+
+// Then add additional custom code here
+
+$corporatiu :  #7BACFC;
+
+$custom-colors: (
+  "corporatiu": $corporatiu
+);
+
+$theme-colors: map-merge($theme-colors, $custom-colors);
+
+.btn-corporatiu{
+  background-color: $corporatiu;
+  color: $light;
+}
+
+.btn-corporatiu:hover{
+  background-color: shade-color($corporatiu, 10%);
+  color: $light;
+}
+
+.btn-logout:hover{
+  background-color: shade-color($light, 10%);
+}
+
+.sidebar .nav-link:hover{
+  background-color: shade-color($light, 5%);
+  border-width: 1px;
+  border-style: solid;
+  --bs-border-opacity: .5;
+  --bs-primary-rgb: var(--bs-primary);
+  border-color: rgba(var(--bs-primary-rgb), var(--bs-border-opacity)) !important;
+}
+
+.nav-link.active{
+  font-weight: bolder;
+}
+
+.border-opacity-30{
+  --bs-border-opacity: .3;
+}
+
+.border-secondary{
+  border-color: rgba(var(--bs-secondary-rgb),var(--bs-border-opacity)) !important;
+}
+
+@mixin button-close-color($color) {
+  $btn-close-bg:  url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$color}'><path d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/></svg>");
+  background: transparent escape-svg($btn-close-bg) center / $btn-close-width auto no-repeat;
+}
+
+.btn-close-light{
+  @include button-close-color(white);
+}
+
+.skeleton {
+  background: linear-gradient(to right, var(--bs-gray-400) 50%, var(--bs-gray-100) 0%);
+  background-size: 200% 100%;
+  background-position: right;
+  animation: makeItfadeIn 3s 1s infinite;
+}
+
+@keyframes makeItfadeIn {
+  0% {
+    opacity: 1
+  }
+  100% {
+    background-position: left;
+    opacity: 0;
+  }
+}
+
+.breadcrumb-item > a{
+  text-decoration: none;
+}
+
+.breadcrumb-item > a:hover{
+  text-decoration: underline;
+}
+
+.breadcrumb{
+  padding: .75rem 1rem;
+  margin-bottom: 1rem;
+}
+
+@mixin button-close-color($color) {
+  $btn-close-bg:  url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='#{$color}'><path d='M.293.293a1 1 0 011.414 0L8 6.586 14.293.293a1 1 0 111.414 1.414L9.414 8l6.293 6.293a1 1 0 01-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 01-1.414-1.414L6.586 8 .293 1.707a1 1 0 010-1.414z'/></svg>");
+  background: transparent escape-svg($btn-close-bg) center / $btn-close-width auto no-repeat;
+}
+
+@mixin button-close-color-focus($color) {
+  box-shadow: $color 0px 0px 0px 4px;
+}
+
+.btn-close-danger{
+  @include button-close-color($red);
+}
+
+.btn-close-danger:focus{
+  @include button-close-color-focus($red-200);
+}
+
+.btn-close-success{
+  @include button-close-color($green);
+}
+
+.btn-close-success:focus{
+  @include button-close-color-focus($green-200);
+}

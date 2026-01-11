@@ -1,0 +1,59 @@
+{
+    "name": "icsebre/ned",
+    "description": "Nutrició Enteral Domiciliària",
+    "license": "MIT",
+    "type": "project",
+    "homepage": "http://10.84.151.198/ned",
+    "support": {
+        "forum": "https://forum.codeigniter.com/",
+        "source": "https://github.com/codeigniter4/CodeIgniter4",
+        "slack": "https://codeigniterchat.slack.com"
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "svn://10.84.151.203/repo_php/autenticacio_ci4"
+        },
+        {
+            "type": "vcs",
+            "url": "svn://10.84.151.203/repo_php/notalegal_ci4"
+        }
+    ],
+    "require": {
+        "php": "^8.1",
+        "codeigniter4/framework": "^4.0",
+        "icsebre/auth": "^4",
+        "icsebre/notalegal": "^1",
+        "nesbot/carbon": "^2.57",
+        "phpoffice/phpspreadsheet": "^3.9"
+    },
+    "require-dev": {
+        "fakerphp/faker": "^1.9",
+        "mikey179/vfsstream": "^1.6",
+        "phpunit/phpunit": "^10.5.16",
+        "kint-php/kint": "^5.0.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/",
+            "Config\\": "app/Config/"
+        },
+        "exclude-from-classmap": [
+            "**/Database/Migrations/**"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\Support\\": "tests/_support"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true,
+        "secure-http": false
+    },
+    "scripts": {
+        "test": "phpunit"
+    }
+}
