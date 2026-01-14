@@ -95,7 +95,7 @@
           $('#dato-alta').text(tratamiento && tratamiento.fecha_alta ? fechaPretty(tratamiento.fecha_alta) : '');
           $('#dato-cambio_confirmado').text(tratamiento && tratamiento.fecha_cambio_confirmado ? fechaPretty(tratamiento.fecha_cambio_confirmado) : '');
           $('#dato-confirmado').text(tratamiento && tratamiento.confirmado_hasta ? fechaPretty(tratamiento.confirmado_hasta) : '');
-          $('#dato-estado').text(tratamiento && tratamiento.estat ? tratamiento.estat : 'Pendiente');
+          $('#dato-estado').text(tratamiento && tratamiento.estado ? tratamiento.estado : 'Pendiente');
 
           // también obtenemos datos extra del paciente
           if(nhc != ''){
