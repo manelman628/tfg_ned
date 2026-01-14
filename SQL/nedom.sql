@@ -315,7 +315,7 @@ CREATE TABLE `seguimientos` (
   `fecha_modificacion` datetime DEFAULT NULL,
   `usuario_modificacion` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL,
   `fecha_eliminacion` datetime DEFAULT NULL,
-  `usuario_eliminacio` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL
+  `usuario_eliminacion` varchar(20) CHARACTER SET utf8mb3 COLLATE utf8mb3_general_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_spanish_ci;
 
 -- --------------------------------------------------------
@@ -616,6 +616,80 @@ ALTER TABLE `seguimientos`
 ALTER TABLE `solicitudes`
   ADD CONSTRAINT `id_estado_sol_fk` FOREIGN KEY (`estado_id`) REFERENCES `estados` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT,
   ADD CONSTRAINT `id_trat_sol_fk` FOREIGN KEY (`tratamiento_id`) REFERENCES `tratamientos` (`id`);
+COMMIT;
+
+--
+-- Alimenta las tablas maestra estados, indicaciones y tipos_seguimiento
+--
+INSERT INTO `estados` (`id`, `descripcion`, `clase_bootstrap`) VALUES
+(1, 'Pendiente', 'secondary'),
+(2, 'Validada', 'primary'),
+(3, 'Aprobada', 'success'),
+(4, 'Denegada', 'danger'),
+(5, 'Caducada', 'warning'),
+(6, 'Finalizada', 'info'),
+(7, 'Eliminada', 'danger'),
+(8, 'Rechazada', 'danger');
+COMMIT;
+
+INSERT INTO `indicaciones` (`id`, `codigo`, `descripcion`, `grupo`, `subgrupo`, `via`) VALUES
+(1, 'NED-A.1', 'Tumores de cabeza y cuello', 'Alteraciones mecánicas de la deglución o del tránsito, que necesitan sonda', NULL, 'sonda'),
+(2, 'NED-A.2', 'Tumores del aparato digestivo (esófago, estómago)', 'Alteraciones mecánicas de la deglución o del tránsito, que necesitan sonda', NULL, 'sonda'),
+(3, 'NED-A.3', 'Cirugía ORL y maxilofacial', 'Alteraciones mecánicas de la deglución o del tránsito, que necesitan sonda', NULL, 'sonda'),
+(4, 'NED-A.4', 'Estenosis esofágica no tumoral', 'Alteraciones mecánicas de la deglución o del tránsito, que necesitan sonda', NULL, 'sonda'),
+(5, 'NED-B.1.01', 'Esclerosis múltiple', 'Trastornos neuromotores que impiden la deglución o el tránsito y que necesitan sonda', 'Enfermedades neurológicas que cursan con disfagia grave', 'sonda'),
+(6, 'NED-B.1.02', 'Esclerosis lateral amiotrófica', 'Trastornos neuromotores que impiden la deglución o el tránsito y que necesitan sonda', 'Enfermedades neurológicas que cursan con disfagia grave', 'sonda'),
+(7, 'NED-B.1.03', 'Síndromes miasteniformes', 'Trastornos neuromotores que impiden la deglución o el tránsito y que necesitan sonda', 'Enfermedades neurológicas que cursan con disfagia grave', 'sonda'),
+(8, 'NED-B.1.04', 'Síndrome de Guillain-Barré', 'Trastornos neuromotores que impiden la deglución o el tránsito y que necesitan sonda', 'Enfermedades neurológicas que cursan con disfagia grave', 'sonda'),
+(9, 'NED-B.1.05', 'Secuelas de enfermedades infecciosas o traumáticas del sistema nervioso central', 'Trastornos neuromotores que impiden la deglución o el tránsito y que necesitan sonda', 'Enfermedades neurológicas que cursan con disfagia grave', 'sonda'),
+(10, 'NED-B.1.06', 'Retraso mental grave', 'Trastornos neuromotores que impiden la deglución o el tránsito y que necesitan sonda', 'Enfermedades neurológicas que cursan con disfagia grave', 'sonda'),
+(11, 'NED-B.1.07', 'Procesos degenerativos severos del sistema nervioso central (Enfermedades neurológicas con afagia o disfagia severa)', 'Trastornos neuromotores que impiden la deglución o el tránsito y que necesitan sonda', 'Enfermedades neurológicas que cursan con disfagia grave', 'sonda'),
+(12, 'NED-B.2', 'Accidentes cerebrovasculares', 'Trastornos neuromotores que impiden la deglución o el tránsito y que necesitan sonda', '', 'sonda'),
+(13, 'NED-B.3', 'Tumores cerebrales', 'Trastornos neuromotores que impiden la deglución o el tránsito y que necesitan sonda', '', 'sonda'),
+(14, 'NED-B.4', 'Parálisis cerebral', 'Trastornos neuromotores que impiden la deglución o el tránsito y que necesitan sonda', '', 'sonda'),
+(15, 'NED-B.5', 'Coma neurológico', 'Trastornos neuromotores que impiden la deglución o el tránsito y que necesitan sonda', '', 'sonda'),
+(16, 'NED-B.6', 'Tumores cerebrales', 'Trastornos severos de la motilidad intestinal: pseudoobstrucción intestinal, gastroparesia diabética', '', 'sonda'),
+(17, 'NED-C.1.01', 'Síndrome de intestino corto severo', 'Pacientes con requerimientos especiales de energía y/o nutrientes', 'Síndromes de malabsorción severa', 'via oral'),
+(18, 'NED-C.1.02', 'Diarrea intratable de origen autoinmune', 'Pacientes con requerimientos especiales de energía y/o nutrientes', 'Síndromes de malabsorción severa', 'via oral'),
+(19, 'NED-C.1.03', 'Linfoma', 'Pacientes con requerimientos especiales de energía y/o nutrientes', 'Síndromes de malabsorción severa', 'via oral'),
+(20, 'NED-C.1.04', 'Esteatorrea postgastrectomía', 'Pacientes con requerimientos especiales de energía y/o nutrientes', 'Síndromes de malabsorción severa', 'via oral'),
+(21, 'NED-C.1.05', 'Carcinoma de páncreas', 'Pacientes con requerimientos especiales de energía y/o nutrientes', 'Síndromes de malabsorción severa', 'via oral'),
+(22, 'NED-C.1.06', 'Resección amplia pancreática', 'Pacientes con requerimientos especiales de energía y/o nutrientes', 'Síndromes de malabsorción severa', 'via oral'),
+(23, 'NED-C.1.07', 'Insuficiencia vascular mesentérica', 'Pacientes con requerimientos especiales de energía y/o nutrientes', 'Síndromes de malabsorción severa', 'via oral'),
+(24, 'NED-C.1.08', 'Amiloidosis', 'Pacientes con requerimientos especiales de energía y/o nutrientes', 'Síndromes de malabsorción severa', 'via oral'),
+(25, 'NED-C.1.09', 'Esclerodermia', 'Pacientes con requerimientos especiales de energía y/o nutrientes', 'Síndromes de malabsorción severa', 'via oral'),
+(26, 'NED-C.1.10', 'Enteritis eosinofílica', 'Pacientes con requerimientos especiales de energía y/o nutrientes', 'Síndromes de malabsorción severa', 'via oral'),
+(27, 'NED-C.2.01', 'Epilepsia refractaria', 'Pacientes con requerimientos especiales de energía y/o nutrientes', 'Enfermedades neurológicas subsidiarias de dietas cetogénicas', 'via oral'),
+(28, 'NED-C.2.02', 'Deficiencia del transportador tipo I de glucosa', 'Pacientes con requerimientos especiales de energía y/o nutrientes', 'Enfermedades neurológicas subsidiarias de dietas cetogénicas', 'via oral'),
+(29, 'NED-C.2.03', 'Deficiencia del complejo piruvato-deshidrogenasa', 'Pacientes con requerimientos especiales de energía y/o nutrientes', 'Enfermedades neurológicas subsidiarias de dietas cetogénicas', 'via oral'),
+(30, 'NED-C.3', 'Alergia o intolerancia diagnosticada a las proteínas de la leche de vaca en lactantes', 'Pacientes con requerimientos especiales de energía y/o nutrientes', '', 'via oral'),
+(31, 'NED-C.4', 'Pacientes desnutridos que deben ser sometidos a cirugía mayor programada o trasplantes', 'Pacientes con requerimientos especiales de energía y/o nutrientes', '', 'via oral'),
+(32, 'NED-C.5', 'Pacientes con encefalopatía hepática crónica con intolerancia a las proteínas de la dieta', 'Pacientes con requerimientos especiales de energía y/o nutrientes', '', 'via oral'),
+(33, 'NED-C.6', 'Pacientes con adrenoleucodistrofia ligada al cromosoma X, neurológicamente asintomáticos', 'Pacientes con requerimientos especiales de energía y/o nutrientes', '', 'via oral'),
+(34, 'NED-D.1', 'Enfermedad inflamatoria intestinal: colitis ulcerosa y enfermedad de Crohn', 'Situaciones clínicas que cursan con desnutrición grave', '', 'via oral'),
+(35, 'NED-D.2', 'Caquexia cancerosa por enteritis crónica por tratamiento quimio y/o radioterápico', 'Situaciones clínicas que cursan con desnutrición grave', '', 'via oral'),
+(36, 'NED-D.3', 'Patología médica infecciosa que conlleva malabsorción severa: SIDA', 'Situaciones clínicas que cursan con desnutrición grave', '', 'via oral'),
+(37, 'NED-D.4', 'Fibrosis quística', 'Situaciones clínicas que cursan con desnutrición grave', '', 'via oral'),
+(38, 'NED-E.1', 'Otros: Disfagia', 'Otros', '', 'via oral'),
+(39, 'NED-F.1', 'Otros: Pediatría', 'Otros', '', 'via oral'),
+(40, 'NED-D.5', 'Fístulas enterocutáneas de bajo débito', 'Situaciones clínicas que cursan con desnutrición grave', '', 'via oral'),
+(41, 'NED-D.6', 'Insuficiencia renal infantil que compromete el crecimiento del paciente', 'Situaciones clínicas que cursan con desnutrición grave', '', 'via oral');
+COMMIT;
+
+INSERT INTO `tipos_seguimiento` (`id`, `descripcion`, `rol`, `estados_origen`, `estado_destino_id`, `roles_destino_avisos`, `mensaje_aviso`, `titulo_aviso`, `editable`) VALUES
+(1, 'Validación', 'admin,farmacia', '1', 2, 'admin,catsalut', '<h3>El tratamiento {id_tratamiento} ha sido validado y ha generado una nueva solicitud</h3><p>Por favor, accede a la <a href=\"{baseURL}/tratamientos/{id_tratamiento}\">aplicación NED</a> para continuar con el proceso</p>', 'NED - Solicitud validada', 0),
+(2, 'Vuelta a Pendiente', 'admin,farmacia', '2,3,4,5,6,7,8', 1, NULL, NULL, NULL, 0),
+(3, 'Aprobar Solicitud', 'admin,catsalut', '2', 3, 'farmacia', '<h3>La solicitud con ID:{id_tratamiento} ha sido aprobada</h3><p>Por favor, accede a la <a href=\"{baseURL}/tratamientos/{id_tratamiento}\">aplicación NED</a> para continuar con el proceso</p>', 'NED - Solicitud Aprobada', 0),
+(4, 'Datos de seguimiento de Farmacia', 'admin,farmacia', NULL, NULL, NULL, NULL, NULL, 1),
+(5, 'Datos de seguimiento de Prescriptor', 'admin,prescriptor', NULL, NULL, NULL, NULL, NULL, 1),
+(6, 'Pendiente de Renovar', '', '3', 5, 'admin,prescriptor', '<h3>La solicitud con ID:{id_tratamiento} ha caducado, y está pendiente de ser revisada por un/una presprictor/a (cambio de fecha \"confirmado hasta\")</h3><p>Por favor, accede a la <a href=\"{baseURL}/tratamientos/{id_tratamiento}\">aplicación NED</a> para continuar con el proceso</p>', 'NED - Solicitud Caducada', 0),
+(7, 'Finalizar Solicitud', 'admin,prescriptor,catsalut', '1,2,3,5', 6, 'admin,farmacia,catsalut', '<h3>La solicitud con ID:{id_tratamiento} ha sido finalizada por un/a prescriptor/a </h3><p>Por favor, accede a la <a href=\"{baseURL}/tratamientos/{id_tratamiento}\">aplicación NED</a> para ver los detalles</p>', 'NED - Solicitud Finalizada', 0),
+(8, 'Denegar Solicitud', 'admin,catsalut', '2,3', 4, 'farmacia', '<h3>La solicitud con ID:{id_tratamiento} ha sido denegada</h3><p>Por favor, accede a la <a href=\"{baseURL}/tratamientos/{id_tratamiento}\">aplicación NED</a> para ver los detalles</p>', 'NED - Solicitud Denegada', 0),
+(9, 'Eliminar solicitud', '', NULL, 7, NULL, NULL, NULL, 0),
+(10, 'Requerir información a Prescriptor', 'admin,catsalut', '2,3,5', 2, 'admin,prescriptor', '<h3>Hay un requerimiento de información sobre la solicitud {id_tratamiento}</h3><p>Por favor, accede a la <a href=\"{baseURL}/tratamientos/{id_tratamiento}\">aplicación NED</a> para completar la información requerida</p>', 'NED - Requerimiento de información', 1),
+(11, 'Requerir información a Farmacia', 'admin,catsalut', '2,3,5', 2, 'admin,farmacia', '<h3>Hay un requerimiento de información sobre la solicitud {id_tratamiento}</h3><p>Por favor, accede a la <a href=\"{baseURL}/tratamientos/{id_tratamiento}\">aplicación NED</a> para completar la información requerida</p>', 'NED - Requerimiento de información', 1),
+(12, 'Detalles de administración', 'admin,farmacia', '1,2,3', NULL, NULL, NULL, NULL, 1),
+(13, 'Rechazar', 'admin,farmacia', '1', 8, 'admin,prescriptor', '<h3>La solicitud con ID:{id_tratamiento} ha sido Rechazada por el servicio de Farmacia </h3><p>Por favor, accede a la <a href=\"{baseURL}/tratamientos/{id_tratamiento}\">aplicación NED</a> para ver los detalles</p>\n', 'NED - Solicitud Rechazada', 0);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
